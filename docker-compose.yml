@@ -1,0 +1,44 @@
+version: '3'
+services:
+    web:
+        image: felixmagento:phpapache2.0
+        build: "./web"
+        container_name: web
+        restart: always
+        user: root
+        ports:
+          - "80:80"
+          - "443:443"
+          - "32823:22"
+          - "9200:9200"
+        links:
+          - mysql
+    mysql:
+        image: mariadb:10.4
+        container_name: mysql
+        restart: always
+        ports:
+          - "3306:3306"
+        environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=magento
+        volumes:
+          - db-data:/var/lib/mysql
+    phpmyadmin:
+        container_name: phpmyadmin
+        restart: always
+        image: phpmyadmin/phpmyadmin:latest
+        environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - PMA_USER=root
+          - PMA_PASSWORD=root
+        ports:
+          - "8080:80"
+        links:
+          - mysql:db
+        depends_on:
+          - mysql
+
+volumes:
+    db-data:
+        external: false
