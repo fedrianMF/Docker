@@ -7,3 +7,5 @@ Used containers:
 Created volumes:
     -For mysql -> db-data
     -For es01 -> elasticsearch-data
+
+commands.txt file: that document it used after run "docker-compose up --build"

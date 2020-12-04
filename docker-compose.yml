@@ -2,7 +2,7 @@ version: '3'
 services:
     web:
         image: felixmagento:phpapache2.0
-        build: "./"
+        build: ./
         container_name: web
         restart: always
         user: root
@@ -61,7 +61,6 @@ services:
           - mysql:db
         depends_on:
           - mysql
-
 volumes:
     db-data:
         external: false
