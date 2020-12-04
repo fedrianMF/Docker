@@ -4,7 +4,7 @@ COPY php.ini /usr/local/etc/php/conf.d/php.ini
 COPY apache2.conf /etc/apache2/apache2.conf
 WORKDIR /var/www/html
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
-RUN apt update && apt upgrade -y && apt install unzip
+RUN apt update && apt install unzip
 COPY magento2.4.zip /var/www/html
 RUN unzip magento2.4.zip
 RUN chmod +x /usr/local/bin/install-php-extensions && sync
