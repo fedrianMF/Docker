@@ -2,7 +2,7 @@ version: '3'
 services:
     web:
         image: felixmagento:phpapache2.0
-        build: "./web"
+        build: "./"
         container_name: web
         restart: always
         user: root
@@ -10,9 +10,32 @@ services:
           - "80:80"
           - "443:443"
           - "32823:22"
-          - "9200:9200"
         links:
           - mysql
+          - es01
+        depends_on: 
+          - es01
+          - mysql
+    es01:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+        container_name: es01
+        ports:
+          - 9200:9200
+        environment:
+          - node.name=es01
+          - cluster.name=es-docker-cluster
+          - discovery.type=single-node
+          - bootstrap.memory_lock=true
+          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        volumes:
+          - elasticsearch-data:/usr/share/elasticsearch/data
+        ulimits:
+          memlock:
+            soft: -1
+            hard: -1
+          nofile:
+            soft: 65536
+            hard: 65536
     mysql:
         image: mariadb:10.4
         container_name: mysql
@@ -42,3 +65,5 @@ services:
 volumes:
     db-data:
         external: false
+    elasticsearch-data:
+        driver: local
