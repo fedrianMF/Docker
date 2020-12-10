@@ -1,4 +1,3 @@
 bin/magento setup:install --base-url=http://localhost/ --db-host=mysql --db-name=magento --db-user=root --db-password=root --admin-firstname=Felix --admin-lastname=Mamani --admin-email=fedrian.mamani@gmail.com --admin-user=admin --admin-password=admineslaonda0 --language=en_US --currency=USD --timezone=America/La_Paz --use-rewrites=1 --search-engine=elasticsearch7 --elasticsearch-host=es01 --elasticsearch-port=9200
 php bin/magento cache:clean
 php bin/magento cache:flush
-chmod -R 777 var/ pub/ generated/ app/etc bin/magento
