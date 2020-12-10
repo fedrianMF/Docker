@@ -4,7 +4,7 @@ services:
         image: felixmagento:phpapache2.0
         build: ./
         container_name: web
-        restart: on-failure
+        restart: always
         user: root
         ports:
           - "80:80"
