@@ -2,3 +2,8 @@ bin/magento setup:install --base-url=http://localhost/ --db-host=mysql --db-name
 php bin/magento cache:clean
 php bin/magento cache:flush
 chmod -R 777 var/ pub/ generated/ app/etc bin/magento
+
+# install Magento 2
+ADD install.sh /
+RUN chmod +x /install.sh
+CMD ["/install.sh"]
